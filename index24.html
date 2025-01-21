@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #e9f5ff;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .product {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .product-image {
+            flex: 1 1 40%;
+            position: relative;
+        }
+
+        .product-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .product-image img:hover {
+            transform: scale(1.05);
+        }
+
+        .carousel {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .carousel img {
+            width: 50px;
+            height: 50px;
+            border-radius: 4px;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .carousel img:hover {
+            border-color: #007bff;
+        }
+
+        .product-details {
+            flex: 1 1 55%;
+        }
+
+        .product-title {
+            font-size: 2rem;
+            margin: 10px 0;
+        }
+
+        .product-description {
+            font-size: 1rem;
+            margin: 15px 0;
+            color: #555;
+        }
+
+        .product-specifications {
+            margin: 20px 0;
+        }
+
+        .product-specifications h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .product-specifications ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .product-specifications ul li {
+            display: flex;
+            align-items: center;
+            margin: 5px 0;
+            padding: 5px 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .product-specifications ul li::before {
+            content: '\2022';
+            color: #007bff;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .product-price {
+            font-size: 1.8rem;
+            margin: 20px 0;
+            color: #28a745;
+        }
+
+        .buy-button {
+            display: inline-block;
+            padding: 12px 30px;
+            font-size: 1rem;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s;
+        }
+
+        .buy-button:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+        .wishlist-button {
+            display: inline-block;
+            margin-left: 15px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            color: #007bff;
+            background-color: transparent;
+            border: 2px solid #007bff;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .wishlist-button:hover {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .reviews {
+            margin-top: 40px;
+        }
+
+        .reviews h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .review {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        .review h4 {
+            margin: 0;
+            font-size: 1.2rem;
+            color: #333;
+        }
+
+        .review p {
+            margin: 5px 0;
+            color: #555;
+        }
+
+        .review small {
+            color: #888;
+        }
+
+        .review-form {
+            margin-top: 20px;
+        }
+
+        .review-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            resize: vertical;
+        }
+
+        .review-form button {
+            padding: 10px 20px;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .review-form button:hover {
+            background-color: #0056b3;
+        }
+
+        .rating {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin: 15px 0;
+        }
+
+        .rating span {
+            font-size: 1.5rem;
+            color: #ffcc00;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .rating span:hover {
+            transform: scale(1.2);
+        }
+
+        .social-sharing {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-sharing a {
+            display: inline-block;
+            padding: 10px;
+            color: #fff;
+            background-color: #007bff;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .social-sharing a:hover {
+            background-color: #0056b3;
+        }
+
+        @media (max-width: 768px) {
+            .product {
+                flex-direction: column;
+            }
+
+            .product-image,
+            .product-details {
+                flex: 1 1 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="product">
+            <div class="product-image">
+                <img id="mainImage" src="product1.webp" alt="Product Image">
+                <div class="carousel">
+                    <img src="product2.webp" alt="Thumbnail 1" onclick="changeImage(this.src)">
+                    <img src="product3.webp" alt="Thumbnail 2" onclick="changeImage(this.src)">
+                    <img src="product3.webp" alt="Thumbnail 3" onclick="changeImage(this.src)">
+                </div>
+            </div>
+            <div class="product-details">
+                <h1 class="product-title">Product Name</h1>
+                <div class="rating">
+                    <span>&#9733;</span>
+                    <span>&#9733;</span>
+                    <span>&#9733;</span>
+                    <span>&#9733;</span>
+                    <span>&#9734;</span>
+                </div>
+                <p class="product-description">This product is a high-quality item designed to make your life better. Featuring top-notch materials and cutting-edge technology, it's a must-have for anyone.</p>
+                <div class="product-specifications">
+                    <h3>Specifications:</h3>
+                    <li>High-resolution display</li>
+                    <li>Durable and lightweight design</li>
+                    <li>Battery life up to 12 hours</li>
+                    <li>1-year warranty included</li>
+                    <li>Available in multiple colors</li>
+                </ul>
+            </div>
+            <p class="product-price">$499.99</p>
+            <a href="#" class="buy-button">Buy Now</a>
+            <button class="wishlist-button">Add to Wishlist</button>
+            <div class="social-sharing">
+                <a href="#" title="Share on Facebook">Facebook</a>
+                <a href="#" title="Share on Twitter">Twitter</a>
+                <a href="#" title="Share on Instagram">Instagram</a>
+            </div>
+        </div>
+    </div>
+    <div class="reviews">
+        <h3>Customer Reviews</h3>
+        <div class="review">
+            <h4>John Doe</h4>
+            <p>Amazing product! The quality is outstanding, and it meets all my expectations. Highly recommend it.</p>
+            <small>Posted on: 2025-01-08</small>
+        </div>
+        <div class="review">
+            <h4>Jane Smith</h4>
+            <p>Great value for the price. The design and functionality are exceptional.</p>
+            <small>Posted on: 2025-01-07</small>
+        </div>
+        <div class="review-form">
+            <h3>Leave a Review</h3>
+            <textarea placeholder="Write your review here..." rows="4"></textarea>
+            <button>Submit Review</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    function changeImage(src) {
+        const mainImage = document.getElementById("mainImage");
+        mainImage.src = src;
+    }
+</script>
+</body>
+</html>
+
+                       
